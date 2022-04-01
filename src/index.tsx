@@ -1,6 +1,6 @@
 import * as esbuild from 'esbuild-wasm';
 import { useState, useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 
 
 const App = () => {
@@ -51,5 +51,10 @@ const App = () => {
     )
 };
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+// this is how we render in react 18. replaced reactdom.render()
+const container = document.querySelector('#root');
+if (!container) throw new Error('failed to find root element'); // so tsc knows container won't be null
+const root = ReactDOM.createRoot(container);
+root.render(<App />)
+
 
