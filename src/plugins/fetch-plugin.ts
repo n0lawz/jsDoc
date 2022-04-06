@@ -2,6 +2,10 @@ import * as esbuild from 'esbuild-wasm';
 import axios from 'axios';
 import localForage from 'localforage';
 
+
+// onLoad is called, we register a function to be executed, and that function is only ran
+// when we have a file that we're trying to resolve that matches the given filter.
+
 // use this to set/get item in db
 const fileCache = localForage.createInstance({
   name: 'filecache'
@@ -19,18 +23,20 @@ export const fetchPlugin = (inputCode: string) => {
           };
         });
 
-        build.onLoad({ filter: /.css$/ }, async (args: any) => {
-            // Check to see if we have already fetched this file and if it is in the cache
-            const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(args.path);
+      build.onLoad({ filter: /.*/ }, async (args: any) => {
+         // Check to see if we have already fetched this file and if it is in the cache
+         const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(args.path);
         
-            // if it is, return it immediately
-            if (cachedResult) {
-              return cachedResult;
-            }
+         // if it is, return it immediately
+         if (cachedResult) {
+           return cachedResult;
+         }
+      })
+
+        build.onLoad({ filter: /.css$/ }, async (args: any) => {
         
             const { data, request } = await axios.get(args.path);
-            
-
+          
             // remove new lines, escape single and double quotes for css
             // used so we can pass in as a JS string
             const escaped = data.replace(/\n/g, '').replace(/"/g, '\\"').replace(/'/g, "\\'");
@@ -54,15 +60,6 @@ export const fetchPlugin = (inputCode: string) => {
           });
           
         build.onLoad({ filter: /.*/ }, async (args: any) => {
-        
-            // Check to see if we have already fetched this file and if it is in the cache
-            const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(args.path);
-    
-            // if it is, return it immediately
-            if (cachedResult) {
-              return cachedResult;
-            }
-        
             const { data, request } = await axios.get(args.path);
 
             const result: esbuild.OnLoadResult = {
