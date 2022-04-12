@@ -27,12 +27,13 @@ const App = () => {
         startService();
     }, []);
 
-    // function called on onClick event
+    // function that builds bundle and stores it in result
     const onClick = async () => {
         if (!ref.current) {
             return;
         }
 
+        // what we get back from onClick
         const result = await ref.current.build({
             entryPoints: ['index.js'],
             bundle: true,
@@ -44,16 +45,16 @@ const App = () => {
             }
         });
 
-         console.log(result);
-
+         // join together all the output files of the bundle
+         // updates code piece of state where the output of our bundle is stored
         setCode(result.outputFiles[0].text);
-
-        try {
-            eval(result.outputFiles[0].text)
-        } catch (err) {
-            alert(err);
-        }
     };
+
+    const html = `
+        <script>
+            ${code}
+        </script>
+    `
 
 
     return (
@@ -63,7 +64,7 @@ const App = () => {
                 <button onClick={onClick}>Submit</button>
             </div>
             <pre>{code}</pre>
-            <iframe src="/test.html" />
+            <iframe title="user code" sandbox="allow-scripts" srcDoc={html} />
         </div>
     )
 };
