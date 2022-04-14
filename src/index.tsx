@@ -61,7 +61,7 @@ const App = () => {
                 <script>
                     window.addEventListener('message', (event) => {
                          eval(event.data);
-                    })
+                    }, false);
                 </script>
             </body>
         </html>
