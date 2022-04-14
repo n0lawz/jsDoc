@@ -11,9 +11,6 @@ const App = () => {
     // code the user writes into text area
     const [input, setInput] = useState('');
 
-    // the output from our esbuild tool. transpiled and bundled code we will dispaly in pre element
-    const [code, setCode] = useState('');
-
     // initializing esbuild by finding esbuild.wasm binary in public folder
     // used useRef hook to have access outside of startService function
     const startService = async () => {
@@ -33,6 +30,8 @@ const App = () => {
         if (!ref.current) {
             return;
         }
+
+        iframe.current.srcdoc = html;
 
         // what we get back from onClick
         const result = await ref.current.build({
@@ -60,8 +59,14 @@ const App = () => {
                 <div id="root"></div>
                 <script>
                     window.addEventListener('message', (event) => {
-                         eval(event.data);
-                    }, false);
+                        try{
+                            eval(event.data);
+                        } catch(err) {
+                            const root = document.querySelector('#root');
+                            root.innerHTML = '<div style="color: red"><h4>Runtime Error</h4>' + err + '</div>';
+                            console.error(err);
+                        }
+                    }, false); 
                 </script>
             </body>
         </html>
@@ -74,8 +79,7 @@ const App = () => {
             <div>
                 <button onClick={onClick}>Submit</button>
             </div>
-            <pre>{code}</pre>
-            <iframe  ref={iframe} title="user-code" sandbox="allow-scripts" srcDoc={html} />
+            <iframe  ref={iframe} title="code-preview" sandbox="allow-scripts" srcDoc={html} />
         </div>
     )
 };
