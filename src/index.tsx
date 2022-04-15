@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom/client';
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
+import CodeEditor from './components/code-editor';
 
 
 const App = () => {
@@ -11,7 +12,7 @@ const App = () => {
     // code the user writes into text area
     const [input, setInput] = useState('');
 
-    // initializing esbuild by finding esbuild.wasm binary in public folder
+    // initializing esbuild by fetcbj g esbuild.wasm binary from unpkg
     // used useRef hook to have access outside of startService function
     const startService = async () => {
         ref.current = await esbuild.startService({
@@ -31,6 +32,7 @@ const App = () => {
             return;
         }
 
+        // clears iframe content before next render
         iframe.current.srcdoc = html;
 
         // what we get back from onClick
@@ -75,6 +77,7 @@ const App = () => {
 
     return (
         <div>
+            <CodeEditor />
             <textarea value ={input} onChange={e => setInput(e.target.value)}></textarea>
             <div>
                 <button onClick={onClick}>Submit</button>
