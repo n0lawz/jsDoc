@@ -1,12 +1,22 @@
 import Editor from '@monaco-editor/react';
+import { useRef } from 'react';
 
 interface CodeEditorProps {
-    defaultValue: string;
+    defaultValue: string,
+    onChange(value: string):  void;
 }
 
-const CodeEditor: React.FC<CodeEditorProps> = ({ defaultValue }) => {
-    
+const CodeEditor: React.FC<CodeEditorProps> = ({ onChange,defaultValue }) => {
+    const editorRef = useRef<any>();
+
+    const onEditorMount = (editor: any, _monaco: any) => {
+        editorRef.current = editor;
+        editor.onDidChangeModelContent(() => onChange(editor.getValue()));
+        editor.getModel()?.updateOptions({ tabSize: 2 })
+    };
+
     return <Editor
+        onMount={onEditorMount}
         height="500px"
         language="javascript"
         defaultValue={ defaultValue }

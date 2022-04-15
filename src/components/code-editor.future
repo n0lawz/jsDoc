@@ -1,0 +1,30 @@
+  const onEditorMount: OnMount = (editor, _monaco) => {
+    editorRef.current = editor;
+    editor.onDidChangeModelContent(() => onChange(editor.getValue()));
+    editor.getModel()?.updateOptions({ tabSize: 2 });
+ 
+    const highlighter = new Highlighter(
+      //@ts-ignore
+      window.monaco,
+      codeShift,
+      editor,
+    );
+    highlighter.highLightOnDidChangeModelContent(
+      () => {},
+      () => {},
+      undefined,
+      () => {},
+    );
+  }
+ 
+  const onFormatClick = () => {
+    const unformatted = editorRef.current.getValue();
+    const formatted = prettier.format(unformatted, {
+      parser: 'babel',
+      plugins: [parser],
+      useTabs: false,
+      semi: true,
+      singleQuote: true,
+    }).replace(/\n$/, '');
+    editorRef.current.setValue(formatted);
+  }
