@@ -1,11 +1,15 @@
 import Editor from '@monaco-editor/react';
 
-const CodeEditor = () => {
+interface CodeEditorProps {
+    defaultValue: string;
+}
+
+const CodeEditor: React.FC<CodeEditorProps> = ({ defaultValue }) => {
     
     return <Editor
         height="500px"
         language="javascript"
-        defaultValue="Type code here"
+        defaultValue={ defaultValue }
         theme="vs-dark"
         options={{
             wordWrap: 'on',
