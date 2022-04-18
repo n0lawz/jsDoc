@@ -1,20 +1,17 @@
-import 'bulmaswatch/superhero/bulmaswatch.min.css';
-import CodeCell from './components/code-cell';
-import ReactDOM from 'react-dom/client';
+import "bulmaswatch/superhero/bulmaswatch.min.css";
+import CodeCell from "./components/code-cell";
+import ReactDOM from "react-dom/client";
 
 const App = () => {
-        return (
-            <div>
-                <CodeCell />
-            </div>
-        );
-    
+  return (
+    <div>
+      <CodeCell />
+    </div>
+  );
 };
 
 // this is how we render in react 18. replaced reactdom.render()
-const container = document.querySelector('#root');
-if (!container) throw new Error('failed to find root element'); // so tsc knows container won't be null
+const container = document.querySelector("#root");
+if (!container) throw new Error("failed to find root element"); // so tsc knows container won't be null
 const root = ReactDOM.createRoot(container);
-root.render(<App />)
-
-
+root.render(<App />);
