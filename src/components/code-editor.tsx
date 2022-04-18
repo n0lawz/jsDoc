@@ -41,7 +41,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange,defaultValue }) => {
             <button className="button button-format is-primary is-small" onClick={onFormatClick}>Format</button>
         <Editor
             onMount={onEditorMount}
-            height="500px"
+            height="100%"
             language="javascript"
             defaultValue={ defaultValue }
             theme="vs-dark"
