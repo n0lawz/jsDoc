@@ -2,7 +2,7 @@ import * as esbuild from "esbuild-wasm";
 import axios from "axios";
 import localForage from "localforage";
 
-// onLoad is called, we register a function to be executed, and that function is only ran
+// In this file, onLoad is called, we register a function to be executed, and that function is only ran
 // when we have a file that we're trying to resolve that matches the given filter.
 
 // use this to set/get item in db
@@ -69,8 +69,6 @@ export const fetchPlugin = (inputCode: string) => {
           contents: data,
           resolveDir: new URL("./", request.responseURL).pathname,
         };
-
-        // store response in cache
 
         await fileCache.setItem(args.path, result);
 
