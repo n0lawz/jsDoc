@@ -1,5 +1,6 @@
 import "./preview.css";
 import { useEffect, useRef } from "react";
+import { setTokenSourceMapRange } from "typescript";
 
 interface PreviewProps {
   code: string;
@@ -31,11 +32,13 @@ const Preview: React.FC<PreviewProps> = ({ code }) => {
   useEffect(() => {
     // clears iframe content before next render
     iframe.current.srcdoc = html;
-
+    
     // join together all the output files of the bundle
     // updates code piece of state where the output of our bundle is stored
     // setCode(result.outputFiles[0].text);
-    iframe.current.contentWindow.postMessage(code, "*");
+    setTimeout(() => {
+      iframe.current.contentWindow.postMessage(code, "*");
+    }, 50);
   }, [code]);
 
   return (
