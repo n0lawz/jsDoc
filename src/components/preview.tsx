@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 
 interface PreviewProps {
   code: string;
-}
+};
 
 const html = `
   <html>
@@ -18,8 +18,10 @@ const html = `
             };
 
             window.addEventListener('error', (event) => {
+              event.preventDefault();
               handleError(event.error);
-            })
+            });
+            
             window.addEventListener('message', (event) => {
               try {
                 eval(event.data);
