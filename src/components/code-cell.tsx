@@ -5,17 +5,19 @@ import bundle from "../bundler";
 import Resizable from "./resizable";
 
 const CodeCell = () => {
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState('');
+  const [err, setErr] = useState('');
 
   // code the user writes into code editor
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
 
   // function that takes input from user and bundles code
   // we use setCode to update state and display in Preview
   useEffect(() => {
     const timer = setTimeout(async () => {
       const output = await bundle(input);
-      setCode(output);
+      setCode(output.code);
+      setErr(output.err);
     }, 750);
 
     return () => {
@@ -32,7 +34,7 @@ const CodeCell = () => {
             onChange={(value) => setInput(value)}
           />
         </Resizable>
-        <Preview code={code} />
+        <Preview code={code} err={err} />
       </div>
     </Resizable>
   );
