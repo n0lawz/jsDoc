@@ -3,7 +3,7 @@ import axios from "axios";
 import localForage from "localforage";
 
 // In this file, onLoad is called, we register a function to be executed, and that function is only ran
-// when we have a file that we're trying to resolve that matches the given filter.
+// when we have a file that we're trying to resolve that matches the given filter
 
 // use this to set/get item in db
 const fileCache = localForage.createInstance({
