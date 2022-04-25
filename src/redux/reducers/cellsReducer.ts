@@ -1,4 +1,3 @@
-import { bindActionCreators } from "redux";
 import { ActionType } from "../action-types";
 import { Action } from "../actions";
 import { Cell } from "../cell";
@@ -22,7 +21,11 @@ const initialState: CellState = {
 const reducer = (state: CellState = initialState, action: Action): CellState => {
   switch (action.type) {
     case ActionType.UPDATE_CELL:
-      return state;
+      const { id, content} = action.payload;
+      return {
+        ...state,
+        data: { ...state.data, [id]: {...state.data[id], content: content}}
+      };
     case ActionType.DELETE_CELL:
       return state;
     case ActionType.MOVE_CELL:
