@@ -2,10 +2,10 @@ import MDEditor, { MDEditorProps } from "@uiw/react-md-editor";
 import React, { useState, useEffect, useRef } from "react";
 
 
-const TextEditor: React.FC = () => {
+const TextEditor: React.FC<MDEditorProps> = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [editing, setEditing] = useState(false);
-  const [value, setValue] = useState('hi');
+  const [value, setValue] = useState<string>('hi');
 
   useEffect(() => {
     const listener = (event: MouseEvent) => {
@@ -26,7 +26,7 @@ const TextEditor: React.FC = () => {
   if (editing) {
     return (
       <div ref={ref}>
-        <MDEditor value={value} onChange={(value: string,) => setValue(value)} />
+        <MDEditor value={value} onChange={(value?: string | undefined) => setValue(value!)} />
       </div>
     );
   }
