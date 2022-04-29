@@ -8,6 +8,14 @@
   opacity: 1.0;
 }
 
+.add-cell:only-child {
+  opacity: 1.0;
+}
+
+.add-cell.add-cell-focused {
+  opacity: 1.0;
+}
+
 .add-cell .divider {
   position: absolute;
   top: 50%;

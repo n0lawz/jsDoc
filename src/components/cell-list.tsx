@@ -18,7 +18,7 @@ const CellList: React.FC = () => {
   )); 
   return <div>
       {renderedCells}
-      <AddCell nextCellId={null} />
+        <AddCell nextCellId={null} />
   </div>
 };
 
