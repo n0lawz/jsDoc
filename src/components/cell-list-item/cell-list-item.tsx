@@ -1,7 +1,7 @@
-import { Cell } from '../redux';
-import CodeCell from './code-cell';
-import TextEditor from './text-editor';
-import ActionBar from './action-bar';
+import { Cell } from '../../redux';
+import CodeCell from '../code-cell/code-cell';
+import TextEditor from '../text-editor/text-editor';
+import ActionBar from '../action-bar/action-bar';
 import './cell-list-item.css';
 
 interface CellListItemProps {
