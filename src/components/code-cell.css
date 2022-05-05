@@ -1,3 +1,8 @@
+.progress-wrapper {
+  height: 100%;
+  flex-grow: 1;
+  background-color: white;
+}
 .progress-cover {
   height: 100%;
   flex-grow: 1;
