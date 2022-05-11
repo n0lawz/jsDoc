@@ -1,9 +1,9 @@
 ## Install
 
-This will install jsmydocs and run on localhost:4005 in your default browser.
+This will install jsmydocs and run on localhost:4005 in your default browser. Specify a file to save your documents to after the serve command.
 ```
 npx jsmydocs serve
-
+npx jsmydocs serve test.js
 ```
 This is an interactive coding enviroment. You can write JavaScript, see it executed, and write documentation using markdown.
 
@@ -14,4 +14,4 @@ This is an interactive coding enviroment. You can write JavaScript, see it execu
 - Re-order or delete cells using the buttons on the top right.
 - Add new cells by hovering on the divider between each cell. 
 
-All of your changes get saved to the file you opened JsDoc with. If you ran npx jbook serve test.js, all of the text and code you write will be saved to the test.js file. 
+All of your changes get saved to the file you opened JsDoc with. If you ran `npx jbook serve test.js`, all of the text and code you write will be saved to the test.js file. 
