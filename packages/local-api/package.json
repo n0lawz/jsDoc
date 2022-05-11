@@ -1,6 +1,6 @@
 {
   "name": "@jsmydocs/local-api",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "",
   "files": [
     "dist"
@@ -23,9 +23,10 @@
     "typescript": "^4.6.4"
   },
   "dependencies": {
-    "@jsmydocs/local-client": "^1.0.0",
+    "@jsmydocs/local-client": "^3.0.0",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "http-proxy-middleware": "^2.0.6"
-  }
+  },
+  "gitHead": "91e8d8843a91e8882c061033caca7b4927f9c2e5"
 }
